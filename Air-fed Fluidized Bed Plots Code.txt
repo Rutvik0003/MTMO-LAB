@@ -1,0 +1,56 @@
+% -------- Forward experiment data --------
+Vfs_fwd = [0.50529, 0.5500332, 0.6162409, 0.7180989]; % m/s
+P_kPa_fwd = [1.1388, 1.1856, 1.2012, 1.2324]; % kPa
+bed_height_cm_fwd = [10.5, 11.8, 13.5, 17.2]; % cm
+
+
+% Sort forward
+[Vfs_fwd, idx_fwd] = sort(Vfs_fwd);
+P_kPa_fwd = P_kPa_fwd(idx_fwd);
+bed_height_cm_fwd = bed_height_cm_fwd(idx_fwd);
+
+
+
+%% --- Plot 1: Pressure Drop vs Superficial Velocity ---
+figure;
+plot(Vfs_fwd, P_kPa_fwd, 'o-', 'LineWidth', 1.5, 'MarkerSize', 8, ...
+     'Color', [0 0.45 0.74], 'DisplayName', 'Forward');
+hold on;
+
+
+% Fixed-bed reference lines
+[~, idx_minP_fwd] = min(Vfs_fwd);
+plot([0 Vfs_fwd(idx_minP_fwd)], [0 P_kPa_fwd(idx_minP_fwd)], ...
+     '--', 'Color', [0 0.45 0.74], 'LineWidth', 1.2);
+
+
+
+xlabel('Superficial Velocity (m/s)', 'FontSize', 12);
+ylabel('Pressure Drop (kPa)', 'FontSize', 12);
+title('Pressure Drop vs Superficial Velocity');
+grid on;
+xlim([0 max(Vfs_fwd)*1.05]);
+legend('Location', 'southeast');
+
+%% --- Plot 2: Bed Height vs Superficial Velocity ---
+figure;
+plot(Vfs_fwd, bed_height_cm_fwd, 's-', 'LineWidth', 1.5, 'MarkerSize', 8, ...
+     'Color', [0 0.45 0.74], 'DisplayName', 'Forward');
+hold on;
+
+
+% Fixed-bed reference lines
+[~, idx_minH_fwd] = min(Vfs_fwd);
+plot([0 Vfs_fwd(idx_minH_fwd)], ...
+     [bed_height_cm_fwd(idx_minH_fwd) bed_height_cm_fwd(idx_minH_fwd)], ...
+     '--', 'Color', [0 0.45 0.74], 'LineWidth', 1.2);
+
+
+
+xlabel('Superficial Velocity (m/s)', 'FontSize', 12);
+ylabel('Bed Height (cm)', 'FontSize', 12);
+title('Bed Height vs Superficial Velocity');
+grid on;
+xlim([0 max(Vfs_fwd)*1.05]);
+legend('Location', 'northwest');
+

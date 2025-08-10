@@ -1,0 +1,69 @@
+% -------- Forward experiment data --------
+Vfs_fwd = [0.08874; 0.08345; 0.07267; 0.06139; 0.05237]; % m/s
+P_kPa_fwd = [2.106; 2.184; 2.246; 2.308; 2.240]; % kPa
+bed_height_cm_fwd = [14; 13.4; 12.5; 11.5; 10.8]; % cm
+
+% -------- Backward experiment data --------
+Vfs_bwd = [0.08874; 0.08345; 0.07267; 0.06139; 0.05237]; % m/s
+P_kPa_bwd = [2.106; 2.184; 2.246; 2.308; 2.340]; % kPa
+bed_height_cm_bwd = [14; 13.4; 12.5; 11.5; 10.8]; % cm
+
+% Sort forward
+[Vfs_fwd, idx_fwd] = sort(Vfs_fwd);
+P_kPa_fwd = P_kPa_fwd(idx_fwd);
+bed_height_cm_fwd = bed_height_cm_fwd(idx_fwd);
+
+% Sort backward
+[Vfs_bwd, idx_bwd] = sort(Vfs_bwd);
+P_kPa_bwd = P_kPa_bwd(idx_bwd);
+bed_height_cm_bwd = bed_height_cm_bwd(idx_bwd);
+
+%% --- Plot 1: Pressure Drop vs Superficial Velocity ---
+figure;
+plot(Vfs_fwd, P_kPa_fwd, 'o-', 'LineWidth', 1.5, 'MarkerSize', 8, ...
+     'Color', [0 0.45 0.74], 'DisplayName', 'Forward');
+hold on;
+plot(Vfs_bwd, P_kPa_bwd, 'o--', 'LineWidth', 1.5, 'MarkerSize', 8, ...
+     'Color', [0.85 0.33 0.1], 'DisplayName', 'Backward');
+
+% Fixed-bed reference lines
+[~, idx_minP_fwd] = min(Vfs_fwd);
+plot([0 Vfs_fwd(idx_minP_fwd)], [0 P_kPa_fwd(idx_minP_fwd)], ...
+     '--', 'Color', [0 0.45 0.74], 'LineWidth', 1.2);
+
+[~, idx_minP_bwd] = min(Vfs_bwd);
+plot([0 Vfs_bwd(idx_minP_bwd)], [0 P_kPa_bwd(idx_minP_bwd)], ...
+     '--', 'Color', [0.85 0.33 0.1], 'LineWidth', 1.2);
+
+xlabel('Superficial Velocity (m/s)', 'FontSize', 12);
+ylabel('Pressure Drop (kPa)', 'FontSize', 12);
+title('Pressure Drop vs Superficial Velocity');
+grid on;
+xlim([0 max(Vfs_fwd)*1.05]);
+legend('Location', 'southeast');
+
+%% --- Plot 2: Bed Height vs Superficial Velocity ---
+figure;
+plot(Vfs_fwd, bed_height_cm_fwd, 's-', 'LineWidth', 1.5, 'MarkerSize', 8, ...
+     'Color', [0 0.45 0.74], 'DisplayName', 'Forward');
+hold on;
+plot(Vfs_bwd, bed_height_cm_bwd, 's--', 'LineWidth', 1.5, 'MarkerSize', 8, ...
+     'Color', [0.85 0.33 0.1], 'DisplayName', 'Backward');
+
+% Fixed-bed reference lines
+[~, idx_minH_fwd] = min(Vfs_fwd);
+plot([0 Vfs_fwd(idx_minH_fwd)], ...
+     [bed_height_cm_fwd(idx_minH_fwd) bed_height_cm_fwd(idx_minH_fwd)], ...
+     '--', 'Color', [0 0.45 0.74], 'LineWidth', 1.2);
+
+[~, idx_minH_bwd] = min(Vfs_bwd);
+plot([0 Vfs_bwd(idx_minH_bwd)], ...
+     [bed_height_cm_bwd(idx_minH_bwd) bed_height_cm_bwd(idx_minH_bwd)], ...
+     '--', 'Color', [0.85 0.33 0.1], 'LineWidth', 1.2);
+
+xlabel('Superficial Velocity (m/s)', 'FontSize', 12);
+ylabel('Bed Height (cm)', 'FontSize', 12);
+title('Bed Height vs Superficial Velocity');
+grid on;
+xlim([0 max(Vfs_fwd)*1.05]);
+legend('Location', 'southeast');
