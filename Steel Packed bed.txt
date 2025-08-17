@@ -1,0 +1,15 @@
+% Data from the table
+Pressure_Diff = [0.5303286, 0.8734824, 1.247832, 0.8578845, 0.4991328]; % kPa
+Superficial_Vel = [0.05708963596, 0.0779026274, 0.09953903817, 0.07588276712, 0.05355459174]; % m/s
+
+% Plot
+figure;
+plot(Superficial_Vel, Pressure_Diff, 'o-b','LineWidth',1.5,'MarkerSize',8,'MarkerFaceColor','r');
+
+% Labels and Title
+xlabel('Superficial Velocity (m/s)','FontSize',12);
+ylabel('Pressure Difference (kPa)','FontSize',12);
+title('Pressure Difference vs Superficial Velocity','FontSize',14);
+
+% Grid
+grid on;
