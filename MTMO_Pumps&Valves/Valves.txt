@@ -1,0 +1,90 @@
+% ================================================================
+% Characteristic plots for 4 valves
+% Pressure drop (psi) and Volumetric Flow Rate (L/s) vs Opening (%)
+% Data taken from processed experimental tables (with estimated Opening %)
+% ================================================================
+
+% -------------------------------
+% Gate Valve (Table 1, Volume = 10 L)
+open_gate = [15, 25, 100];         % Rounded Opening %
+dp_gate   = [12.5, 11.4, 10.2];    % ΔP (psi)
+Q_gate    = [0.495, 0.639, 0.760]; % Flow Rate (L/s)
+
+% -------------------------------
+% Ball Valve (Table 2, Volume = 2 L)
+open_ball = [10, 15, 100];
+dp_ball   = [12.3, 10.5, 8.2];
+Q_ball    = [0.149, 0.206, 0.360];
+
+% -------------------------------
+% Needle Valve (Table 3, Volume = 2 L)
+open_need = [100, 50, 20];
+dp_need   = [12.5, 13.0, 13.2];
+Q_need    = [0.0460, 0.0231, 0.00883];
+
+% -------------------------------
+% Globe Valve (Table 4, Volume = 1 L)
+open_glob = [100, 45, 10];
+dp_glob   = [0.7, 2.6, 11.5];
+Q_glob    = [0.0469, 0.0414, 0.0163];
+
+figure;
+yyaxis left
+plot(open_gate, dp_gate, 'o-b','LineWidth',1.5,'MarkerSize',6);
+ylabel('Pressure drop (psi)');
+ylim([0 inf]);
+
+yyaxis right
+plot(open_gate, Q_gate, 'o-r','LineWidth',1.5,'MarkerSize',6);
+ylabel('Volumetric Flow Rate (L/s)');
+ylim([0 inf]);
+
+xlabel('Opening (%)');
+title('Characteristic plot of Gate Valve');
+grid on;
+
+% -------------------------------
+
+
+figure;
+yyaxis left
+plot(open_ball, dp_ball, 'o-b','LineWidth',1.5,'MarkerSize',6);
+ylabel('Pressure drop (psi)');
+
+yyaxis right
+plot(open_ball, Q_ball, 'o-r','LineWidth',1.5,'MarkerSize',6);
+ylabel('Volumetric Flow Rate (L/s)');
+
+xlabel('Opening (%)');
+title('Characteristic plot of Ball Valve');
+grid on;
+
+
+
+figure;
+yyaxis left
+plot(open_need, dp_need, 'o-b','LineWidth',1.5,'MarkerSize',6);
+ylabel('Pressure drop (psi)');
+
+yyaxis right
+plot(open_need, Q_need, 'o-r','LineWidth',1.5,'MarkerSize',6);
+ylabel('Volumetric Flow Rate (L/s)');
+
+xlabel('Opening (%)');
+title('Characteristic plot of Needle Valve');
+grid on;
+
+
+
+figure;
+yyaxis left
+plot(open_glob, dp_glob, 'o-b','LineWidth',1.5,'MarkerSize',6);
+ylabel('Pressure drop (psi)');
+
+yyaxis right
+plot(open_glob, Q_glob, 'o-r','LineWidth',1.5,'MarkerSize',6);
+ylabel('Volumetric Flow Rate (L/s)');
+
+xlabel('Opening (%)');
+title('Characteristic plot of Globe Valve');
+grid on;

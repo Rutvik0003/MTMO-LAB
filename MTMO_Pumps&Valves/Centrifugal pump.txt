@@ -1,0 +1,20 @@
+% ==========================================================
+% Plot: Pressure (psi) vs Volumetric Flow Rate (L/h)
+% Simple line plot with points connected (no fitting).
+% ==========================================================
+
+% Data from Pressure_vs_Flow.docx
+Pressure = [0.0, 1.4, 1.5, 1.8, 2.1, 2.3, 2.4, 2.0, 2.6, 2.8];  % psi
+FlowRate = [2568, 2817, 2978, 3275, 3582, 3787, 3914, 3529, 4036, 4175]; % L/h
+
+% Sort by Pressure (for a clean line left→right)
+[Pressure, idx] = sort(Pressure);
+FlowRate = FlowRate(idx);
+
+% Plot
+figure;
+plot(Pressure, FlowRate, '-o', 'LineWidth', 1.5, 'MarkerSize', 6);
+xlabel('Pressure (psi)');
+ylabel('Volumetric Flow Rate (L/h)');
+title('Pressure vs Volumetric Flow Rate');
+grid on;
